@@ -180,6 +180,14 @@ function generate_for_gen2sat {
 #arg5: calculus name gen2sat
 #arg6: calculus name mettel
 
+
+if [ "$#" -eq 0 ]; then
+    echo "look at me for arg info"
+    exit 0
+fi
+
+
+
 init $1 $5 $6
 generate_problems $2 $3 $4
 generate_for_mettel
