@@ -1,0 +1,88 @@
+Basic instructions for using Mettel and generated provers
+=========================================================
+
+All commands are to be executed in the current directory.
+
+1) To generate prover for particular logic:
+
+   java -jar mettel2.jar -i S4/S4.s
+
+   The input file is specified with -i.
+
+   If compilation fails, sometimes it helps if output/S4
+   from previous generations with Mettel is deleted.
+
+2) To run problem on prover:
+   
+   java -jar S4.jar -i S4/problems/S4-0000-sat.mtl
+
+   To specify a problem file use -i (optional)
+   Without -i, input formulae in the terminal.  on a new line
+   terminates the input and starts the run.
+
+3) To generate random problems:
+
+   java -cp S4.jar:mettel2-util.jar S4.language.S4.util.S4RandomExpressionGenerator -p S4/S4.random.generation.properties
+
+   Output will be put into a default folder called random_problems.
+   Properties will be the default.
+   To specify output directory use -d.
+   To specify a properties file use -p (sample properties file in
+   output/S4/etc/S4RandomExpressionGenerator.properties).
+   To specify the first index number for the generated file names use
+   --file-index.
+
+4) To benchmark:
+
+   java -cp S4.jar:mettel2-util.jar:opencsv.jar S4.tableau.S4.S4Benchmark -d random_problems
+
+   One must provide a directory with problem files ending with .mtl using -d.
+   To specify allowed execution time (timeout) use -t.
+   To specify number of threads use -n.
+
+Concerning the random problem generator properties file, for each sort
+the following can be specified:
+
+1) frequency of each connective <sort>.<connective>.frequency, e.g., 
+
+   formula.at.frequency  or  formula.negation.frequency
+
+2) frequency of variable <sort>.variable.frequency, e.g., 
+
+   formula.variable.frequency
+
+3) depth <sort>.depth, e.g., 
+
+   formula.depth
+
+4) name of the variables <sort>.variable, e.g., 
+
+   formula.variable
+
+   Variable names must be separated by commas,
+   e.g., 
+
+   formula.variable = p, q, r
+
+   May be empty, e.g., 
+
+   formula.variable = 
+
+   which means that default variable names will be used.
+
+5) number of variables <sort>.variables.number, e.g., 
+
+   formula.variables.number
+
+   One may specify the names for only 2 variables but have a total number
+   of 3 variables then the third variable will get a default name and
+   vice versa.
+
+6) top connectives <sort>.top.connectives,
+   connectives names must be separated by comma, e.g., 
+
+   formula.top.connectives = at, true, false
+
+   May be empty which means that any connective can be top connective of
+   that sort.
+

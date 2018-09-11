@@ -1,0 +1,20 @@
+name: L3
+displayName: L3
+connectives: &:2,|:2,->:2,!:1
+rule: =>p1; =>p2 / => p1 & p2
+rule: p1,p2=> /  p1 & p2 =>
+rule: =>p1,p2 / => p1 | p2
+rule: p1=>; p2=> / p1 | p2 =>
+rule: a=> / !! a=>
+rule: =>a / => !! a
+rule: !A, !B=> / !(A | B)=>
+rule: =>!A; =>!B / => !(A | B)
+rule: !A=>; !B=> / !(A & B)=>
+rule: =>!A, !B / => !(A & B)
+rule: /! A, A=>
+rule: ! A => ; B =>; => A,! B / A -> B=>
+rule: A=>B; ! B=>! A / => A -> B
+rule: A, ! B=> / ! (A -> B)=>
+rule: =>A; =>!B / => ! (A -> B)
+analyticity: !
+details: false
