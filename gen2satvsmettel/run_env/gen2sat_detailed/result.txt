@@ -1,0 +1,26 @@
+;result;time in ms;#vars;#clauses
+0_1_10;unprovable;119;138;530
+0_1_20;unprovable;74;258;1010
+0_1_30;unprovable;108;378;1490
+0_2_10;unprovable;21;138;530
+0_2_20;unprovable;43;258;1010
+0_2_30;unprovable;93;378;1490
+0_3_10;unprovable;8;78;350
+0_3_20;unprovable;17;138;650
+0_3_30;unprovable;29;198;950
+0_4_10;unprovable;6;78;350
+0_4_20;unprovable;15;138;650
+0_4_30;unprovable;28;198;950
+1_1_10;provable;78;137;526
+1_1_20;provable;114;257;1006
+1_1_30;provable;177;377;1486
+1_2_10;provable;50;137;526
+1_2_20;provable;118;257;1006
+1_2_30;provable;198;377;1486
+1_3_10;provable;22;77;346
+1_3_20;provable;42;137;646
+1_3_30;provable;69;197;946
+1_4_10;provable;14;77;346
+1_4_20;provable;33;137;646
+1_4_30;provable;61;197;946
+

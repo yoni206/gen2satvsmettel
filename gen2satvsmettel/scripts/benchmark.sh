@@ -10,6 +10,7 @@ function init() {
   upper_bound=11000
 
   this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+  echo $this_script_dir
 
   results_file_path=$this_script_dir/../results.csv
   tmp_file_path=$this_script_dir/../tmp.tmp
@@ -17,7 +18,7 @@ function init() {
   gen2sat_software_dir=$softwares_dir/gen2sat
   mettel_software_dir=$softwares_dir/mettel
 
-  problems_dir=$this_script_dir/../problems
+  problems_dir=$1
   mettel_problems_dir_F=$problems_dir/mettel/F
   mettel_problems_dir_U=$problems_dir/mettel/U
   gen2sat_problems_file_detailed=$problems_dir/gen2sat/detailed/input.txt
@@ -119,10 +120,11 @@ function parse() {
   cat $mettel_3val_F_env_dir/Lukasiewicz.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-3val-F",/' | sed 's|\.\/||' |sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g"  >> $results_file_path
   cat $mettel_lukavrona_F_env_dir/Lukavrona.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-lukavrona-F",/' | sed 's|\.\/||' | sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g" >> $results_file_path
   cat $mettel_lukavronb_F_env_dir/Lukavronb.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-lukavronb-F",/' | sed 's|\.\/||' | sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g" >> $results_file_path
-  cat $gen2sat_env_dir_undetailed/result.txt | cut -d';' -f1,3,2 |tail -n+2 | sed 's/^/"gen2sat-undetailed;/' | sed 's/;/","/g' | sed 's/$/"/' | sed 's/"//g' | sed 's/unprovable/0/' | sed 's/provable/1/'  >> $results_file_path
-  cat $gen2sat_env_dir_detailed/result.txt | cut -d';' -f1,3,2 |tail -n+2 | sed 's/^/"gen2sat-detailed;/' | sed 's/;/","/g' | sed 's/$/"/' | sed 's/"//g' | sed 's/unprovable/0/' | sed 's/provable/1/'  >> $results_file_path
+  cat $gen2sat_env_dir_undetailed/result.txt | grep -v ^$| cut -d';' -f1,3,2 |tail -n+2 | sed 's/^/"gen2sat-undetailed;/' | sed 's/;/","/g' | sed 's/$/"/' | sed 's/"//g' | sed 's/unprovable/0/' | sed 's/provable/1/'  >> $results_file_path
+  cat $gen2sat_env_dir_detailed/result.txt | grep -v ^$ |cut -d';' -f1,3,2 |tail -n+2 | sed 's/^/"gen2sat-detailed;/' | sed 's/;/","/g' | sed 's/$/"/' | sed 's/"//g' | sed 's/unprovable/0/' | sed 's/provable/1/'  >> $results_file_path
   #use when randoming from mettel
-  #cat $results_file_path |     sed 's/depth//' | sed 's|\.mtl||' | tr '-' '#' |  sed 's/,\([0-9]\)#/,0\1#/' | sed 's/#\([0-9]\),/#0\1,/' > $tmp_file_path
+  cat $results_file_path |     sed 's/depth//' | sed 's|\.mtl||' | tr '-' '#' |  sed 's/,\([0-9]\)#/,0\1#/' | sed 's/#\([0-9]\),/#0\1,/' > $tmp_file_path
+  mv $tmp_file_path $results_file_path
 
   #use for Rothenberg
   cat $results_file_path | tr '_' ',' > $tmp_file_path
@@ -136,29 +138,22 @@ function generate_problems() {
   date
   echo generating problems
   ./generate_rothenberg.sh $1 $2 $3 >> $log_file 2>&1
+  ./generate_problems.sh $this_script_dir $1 $2 $3 Lukavron Lukasiewicz >> $log_file 2>&1
   date
   echo finished generating problems
 }
 
 if [ "$#" -eq 0 ]; then
-    echo "The right way to run me is:"
-    echo "./benchmark.sh <largest formula depth> <interval> <#formulas in each depth>"
-    echo "for example: ./benchmark.sh 10 5 3 would benchmark on 3 formulas of depth 5 and 3 formulas of depth 10"
-    echo "append -nc if you don't want to clean temp files"
-    echo "Also, before running me, do a 'setenv _JAVA_OPTIONS -Xmx4g'"
+    echo "check inside for the right way to run me."
     exit 0
 fi
 
 
-init
+init $1
 create_env
-
-if [ "$4" != "ng" ] && [ "$5" != "ng" ]; then
-  generate_problems $1 $2 $3
-fi
 fetch_files
 run
 parse
-if [ "$4" != "nc" ] && [ "$5" != "nc" ]; then
+if [ "$2" != "nc" ]; then
   destroy_env
 fi

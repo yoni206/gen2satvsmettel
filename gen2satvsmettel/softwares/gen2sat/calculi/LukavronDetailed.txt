@@ -1,6 +1,8 @@
 name: L3
 displayName: L3
-connectives: &:2,|:2,->:2,!:1
+connectives: &:2,|:2,->:2,!:1,true:0,false:0
+rule: / => true
+rule: / false=>
 rule: =>p1; =>p2 / => p1 & p2
 rule: p1,p2=> /  p1 & p2 =>
 rule: =>p1,p2 / => p1 | p2

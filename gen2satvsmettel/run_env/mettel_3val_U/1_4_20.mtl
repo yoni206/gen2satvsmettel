@@ -1,0 +1,54 @@
+/** Problem Statistics **
+formula.conjunction.max-depth = 23
+formula.conjunction.occurences = 21
+formula.disjunction.max-depth = -1
+formula.disjunction.occurences = 0
+formula.false.max-depth = -1
+formula.false.occurences = 0
+formula.implication.max-depth = 24
+formula.implication.occurences = 64
+formula.negation.max-depth = 23
+formula.negation.occurences = 63
+formula.total.connective.max-depth = 24
+formula.total.connective.number = 3
+formula.total.connective.occurences = 148
+formula.total.variable.max-depth = 25
+formula.total.variable.number = 3
+formula.total.variable.occurences = 86
+formula.true.max-depth = -1
+formula.true.occurences = 0
+formula.variable.max-depth.A = 24
+formula.variable.max-depth.B = 24
+formula.variable.max-depth.p = 25
+formula.variable.names = p, A, B
+formula.variable.occurences.A = 40
+formula.variable.occurences.B = 40
+formula.variable.occurences.p = 6
+total.connective.max-depth = 24
+total.connective.number = 4
+total.connective.occurences = 149
+total.symbol.length = 235
+total.symbol.max-depth = 25
+total.variable.max-depth = 25
+total.variable.number = 3
+total.variable.occurences = 86
+valuation.false.max-depth = -1
+valuation.false.occurences = 0
+valuation.total.connective.max-depth = 0
+valuation.total.connective.number = 1
+valuation.total.connective.occurences = 1
+valuation.total.variable.max-depth = -1
+valuation.total.variable.number = 0
+valuation.total.variable.occurences = 0
+valuation.true.max-depth = -1
+valuation.true.occurences = 0
+valuation.unknown.max-depth = 0
+valuation.unknown.occurences = 1
+valuation.variable.names = 
+** End of Problem Statistics **/
+
+/** Status **
+LukasiewiczProver = Unsatisfiable
+** End of Status **/
+
+U (((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> ((! A) -> (!(p -> p)))))))))))))))))))))) & ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> ((! B) -> (!(p -> p))))))))))))))))))))))) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> ((!(A & B)) -> (!(p -> p))))))))))))))))))))))
