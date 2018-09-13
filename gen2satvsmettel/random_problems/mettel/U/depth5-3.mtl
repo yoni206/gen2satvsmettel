@@ -1,0 +1,1 @@
+U ( ( ( ( ( $formulaVariable2 & $formulaVariable4 ) -> ( $formulaVariable2 & $formulaVariable1 ) ) | $formulaVariable4 ) & ( ( ! ( $formulaVariable0 & $formulaVariable2 ) ) & ( ! ( $formulaVariable4 | $formulaVariable1 ) ) ) ) -> ( ! ( ! ( ( $formulaVariable4 | $formulaVariable4 ) -> $formulaVariable3 ) ) ) )

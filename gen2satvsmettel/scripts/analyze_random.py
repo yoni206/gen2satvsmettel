@@ -15,7 +15,7 @@ def main(f):
         size, sn = problem_name.split("#")
         add(results, tool_calc, size, sn, answer, time)
     stats = get_stats(results)
-    pp.pprint(stats)
+    pp.pprint(results)
 
 def get_stats(results):
     stats = {}

@@ -7,8 +7,6 @@ syntax Lukasiewicz{
 	valuation true = 'T' formula;
 	valuation unknown = 'U' formula;
 	valuation false = 'F' formula;
-	formula true = 'true';
-	formula false = 'false';
 	formula	negation = '!' formula;
 	formula	conjunction = formula '&' formula;
 	formula	disjunction = formula '|' formula;
@@ -37,8 +35,4 @@ F (P -> Q) /  T P  F Q priority 1$;
 U (P -> Q) / U P  F Q $|  T P  U Q  priority 2$;
 T (P -> Q) / T Q $|  F P $| U P  U Q  priority 3$;
 
-T false / priority 0$;                    
-U false / priority 0$;
-U true / priority 0$;                     
-F true / priority 0$;
 }
