@@ -4,7 +4,7 @@ function init() {
   this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
   softwares_dir=$this_script_dir/../softwares
   gen2sat_software_dir=$softwares_dir/gen2sat
-  problems_dir=$this_script_dir/../problems/rothenberg
+  problems_dir=$1
   mettel_problems_dir_F=$problems_dir/mettel/F
   mettel_problems_dir_U=$problems_dir/mettel/U
   gen2sat_problems_dir_detailed=$problems_dir/gen2sat/detailed
@@ -49,7 +49,12 @@ if [ "$#" -eq 0 ]; then
     echo "look inside and check what arguments are needed"
 fi
 
-init
+#1 - max size
+#2 - interval
+#3 - problems dir
+
+
+init $3
 generate $1 $2
 deploy
 clean

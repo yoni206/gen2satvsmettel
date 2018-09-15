@@ -10,9 +10,8 @@ function init() {
   upper_bound=11000
 
   this_script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  echo $this_script_dir
 
-  results_file_path=$this_script_dir/../results.csv
+  results_file_path="$2"
   tmp_file_path=$this_script_dir/../tmp.tmp
   softwares_dir=$this_script_dir/../softwares
   gen2sat_software_dir=$softwares_dir/gen2sat
@@ -116,7 +115,9 @@ function parse() {
   date
   echo parsing results
   rm -f $results_file_path
-  cat $mettel_3val_U_env_dir/Lukasiewicz.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-3val-U",/' | sed 's|\.\/||' | sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g"  >> $results_file_path
+  echo $results_file_path
+
+  cat $mettel_3val_U_env_dir/Lukasiewicz.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-3val-U",/' | sed 's|\.\/||' | sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g"  >> "${results_file_path}"
   cat $mettel_3val_F_env_dir/Lukasiewicz.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-3val-F",/' | sed 's|\.\/||' |sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g"  >> $results_file_path
   cat $mettel_lukavrona_F_env_dir/Lukavrona.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-lukavrona-F",/' | sed 's|\.\/||' | sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g" >> $results_file_path
   cat $mettel_lukavronb_F_env_dir/Lukavronb.csv | cut -d, -f1,2,4 | tail -n+2 | sed 's/\.mtl//' | sed 's/^/"mettel-lukavronb-F",/' | sed 's|\.\/||' | sed 's/\.[0-9][0-9]*//' | sed 's/"//g' | sed 's/true/1/' | sed 's/false/0/'  | sed "s|N/A|$upper_bound|g" >> $results_file_path
@@ -149,7 +150,11 @@ if [ "$#" -eq 0 ]; then
 fi
 
 
-init $1
+
+#1 dir to benchmark
+#2 result file path
+
+init $1 $2
 create_env
 fetch_files
 run

@@ -1,1 +1,0 @@
-F ( ( $formulaVariable1 -> ( $formulaVariable3 -> ( ( $formulaVariable3 & $formulaVariable3 ) -> ( $formulaVariable1 | $formulaVariable4 ) ) ) ) & ( $formulaVariable4 -> ( ( ( ! $formulaVariable3 ) | ( ! $formulaVariable1 ) ) -> $formulaVariable0 ) ) )
