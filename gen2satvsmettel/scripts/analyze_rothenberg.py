@@ -11,35 +11,38 @@ def main(f):
         lines = a.readlines()
     for line in lines:
         line = line.strip("\n")
-        tool_calc,problem_name,answer,time = line.split(",")
-        size, sn = problem_name.split("#")
-        add(results, tool_calc, size, sn, answer, time)
-    stats = get_stats(results)
+        tool_calc,positivity,cls,size,answer,time = line.split(",")
+        add(results,tool_calc,positivity,cls,size,answer,time)
+    #stats = get_stats(results)
     pp.pprint(results)
 
 def get_stats(results):
     stats = {}
-    for key in results:
-        stats[key] = {}
-        for tool_calc in results[key]:
-            stats[key][tool_calc] = {}
-            times = [int(results[key][tool_calc][sn][1]) for sn in results[key][tool_calc]]
-            per25 = numpy.percentile(times, 25)
-            med = numpy.median(times)
-            per75 = numpy.percentile(times, 75)
-            stats[key][tool_calc]["per25"] = per25
-            stats[key][tool_calc]["per50"] = med
-            stats[key][tool_calc]["per75"] = per75
+    for cls in results:
+        stats[cls] = {}
+        for positivity in results[cls]:
+            stats[cls][positivity] = {}
+            for tool_calc in results[cls][positivity]:
+                stats[cls][positivity][tool_calc] = {}
+                times = [int(results[cls][positivity][tool_calc][size][1]) for size in results[cls][positivity][tool_calc]]
+                per25 = numpy.percentile(times, 25)
+                med = numpy.median(times)
+                per75 = numpy.percentile(times, 75)
+                stats[cls][positivity][tool_calc]["per25"] = per25
+                stats[cls][positivity][tool_calc]["per50"] = med
+                stats[cls][positivity][tool_calc]["per75"] = per75
     return stats
 
 
 
-def add(results, tool_calc, size, sn , answer, time):
-    if size not in results:
-        results[size] = {}
-    if tool_calc not in results[size]:
-        results[size][tool_calc] = {}
-    results[size][tool_calc][sn] = [answer, time]
+def add(results,tool_calc,positivity,cls,size,answer,time):
+    if cls not in results:
+        results[cls] = {}
+    if positivity not in results[cls]:
+        results[cls][positivity] = {}
+    if tool_calc not in results[cls][positivity]:
+        results[cls][positivity][tool_calc] = {}
+    results[cls][positivity][tool_calc][size] = [answer, time]
 
 
 if __name__ == "__main__":
